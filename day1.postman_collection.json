@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "2919ead2-8329-4d91-92fc-fcba4a931d76",
+		"name": "day1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "259699"
+	},
+	"item": [
+		{
+			"name": "get list of Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//var url=pm.collectionVariables.get(\"BaseUrl\")\r",
+							"//console.log(url)\r",
+							"//var cm=pm.globals.get(\"companyName\")\r",
+							"//console.log(cm)\r",
+							"\r",
+							"var jsonData=pm.response.json();\r",
+							"console.log(jsonData.total_pages);\r",
+							"console.log(jsonData.data[0].email);\r",
+							"\r",
+							"pm.test(\"verifying status\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.status).to.be.eql(\"OK\")\r",
+							"})\r",
+							"pm.test(\"verifying status code\",function()\r",
+							"{\r",
+							"pm.expect(pm.response.code).to.be.eql(200)\r",
+							"})\r",
+							"pm.test(\"verifying object\",function()\r",
+							"{\r",
+							"    pm.expect(jsonData).to.be.a('object')\r",
+							"})\r",
+							"pm.test(\"verifying data type\",function()\r",
+							"{\r",
+							"    pm.expect(jsonData.page).to.be.a('number')\r",
+							"    pm.expect(jsonData.per_page).to.be.a('number')\r",
+							"    pm.expect(jsonData.total).to.be.a('number')\r",
+							"    pm.expect(jsonData.total_pages).to.be.a('number')\r",
+							"    pm.expect(jsonData.data).to.be.an('array')\r",
+							"    pm.expect(jsonData.support).to.be.a('object')\r",
+							"    pm.expect(jsonData.url).to.be.a('string')\r",
+							"})\r",
+							"pm.test(\"Content-Type header is present\", function() {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", function() {\r",
+							"  pm.response.to.have.header(\"Connection\");\r",
+							"});\r",
+							"\r",
+							"//Test for a response header having a particular value:\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function(){\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"\r",
+							"});\r",
+							"var jsonschema={\r",
+							"    \"$schema\": \"http://json-schema.org/draft-06/schema#\",\r",
+							"    \"$ref\": \"#/definitions/Welcome6\",\r",
+							"    \"definitions\": {\r",
+							"        \"Welcome6\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"additionalProperties\": false,\r",
+							"            \"properties\": {\r",
+							"                \"page\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"per_page\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"total\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"total_pages\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"data\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\r",
+							"                        \"$ref\": \"#/definitions/Datum\"\r",
+							"                    }\r",
+							"                },\r",
+							"                \"support\": {\r",
+							"                    \"$ref\": \"#/definitions/Support\"\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"data\",\r",
+							"                \"page\",\r",
+							"                \"per_page\",\r",
+							"                \"support\",\r",
+							"                \"total\",\r",
+							"                \"total_pages\"\r",
+							"            ],\r",
+							"            \"title\": \"Welcome6\"\r",
+							"        },\r",
+							"        \"Datum\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"additionalProperties\": false,\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"email\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"first_name\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"last_name\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"avatar\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"format\": \"uri\",\r",
+							"                    \"qt-uri-protocols\": [\r",
+							"                        \"https\"\r",
+							"                    ],\r",
+							"                    \"qt-uri-extensions\": [\r",
+							"                        \".jpg\"\r",
+							"                    ]\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"avatar\",\r",
+							"                \"email\",\r",
+							"                \"first_name\",\r",
+							"                \"id\",\r",
+							"                \"last_name\"\r",
+							"            ],\r",
+							"            \"title\": \"Datum\"\r",
+							"        },\r",
+							"        \"Support\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"additionalProperties\": false,\r",
+							"            \"properties\": {\r",
+							"                \"url\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"format\": \"uri\",\r",
+							"                    \"qt-uri-protocols\": [\r",
+							"                        \"https\"\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"text\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"text\",\r",
+							"                \"url\"\r",
+							"            ],\r",
+							"            \"title\": \"Support\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"pm.test('Schema is valid or not', function() {\r",
+							"  pm.expect(tv4.validate(jsonData, jsonschema)).to.be.true;\r",
+							" \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}api/users?page=2",
+					"host": [
+						"{{BaseUrl}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "single user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/512",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"512"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData=pm.response.json();\r",
+							"console.log(jsonData.id);\r",
+							"pm.environment.set(\"id\",jsonData.id)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"job\":\"{{$randomJobTitle}}\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"job\":\"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
